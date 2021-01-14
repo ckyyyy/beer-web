@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import Beer from '../../component/Beer';
 
 const Inventory: FC = () => {
   const [beers, setBeers] = useState([]);
@@ -49,11 +50,9 @@ const Inventory: FC = () => {
   return (
     <>
       <h1>Beer Page</h1>
-      <div>
-        {beers.map((beer, key) => (
-          <h4 key={key}>{beer.name}</h4>
-        ))}
-      </div>
+      {beers.map((beer) => (
+        <Beer beer={beer} key={beer.id} />
+      ))}
     </>
   );
 };
