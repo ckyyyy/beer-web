@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import Beer from '../../component/Beer';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const Inventory: FC = () => {
   const [beers, setBeers] = useState([]);
   const [page, setPage] = useState(1);
-  const [isFetching, setIsFetching] = useState(true);
 
   const fetchBeers = () => {
     let url = `https://api.punkapi.com/v2/beers?page=${page}`;
@@ -13,31 +13,12 @@ const Inventory: FC = () => {
       .then((data) => {
         setBeers([...beers, ...data]);
         setPage(page + 1);
-        setIsFetching(false);
       });
   };
 
-  const handleScrolling = () => {
-    // check if reach to the bottom of the page
-    if (
-      window.innerHeight + document.documentElement.scrollTop !==
-      document.documentElement.offsetHeight
-    ) {
-      return;
-    }
-    setIsFetching(true);
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScrolling);
-    return () => window.removeEventListener('scroll', handleScrolling);
+    fetchBeers();
   }, []);
-
-  useEffect(() => {
-    if (isFetching) {
-      fetchBeers();
-    }
-  }, [isFetching]);
 
   if (beers.length == 0) {
     return (
@@ -50,9 +31,20 @@ const Inventory: FC = () => {
   return (
     <>
       <h1>Beer Page</h1>
-      {beers.map((beer) => (
-        <Beer beer={beer} key={beer.id} />
-      ))}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={fetchBeers}
+        hasMore={true || false}
+        loader={
+          <div className="loader" key={0}>
+            Loading ...
+          </div>
+        }
+      >
+        {beers.map((beer) => (
+          <Beer beer={beer} key={beer.id} />
+        ))}
+      </InfiniteScroll>
     </>
   );
 };
