@@ -1,7 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import Beer from '../../component/Beer';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Row, Col } from 'antd';
+import { Row, Col, Typography } from 'antd';
+
+const { Title } = Typography;
 
 const Inventory: FC = () => {
   const [beers, setBeers] = useState([]);
@@ -24,14 +26,14 @@ const Inventory: FC = () => {
   if (beers.length == 0) {
     return (
       <>
-        <h1>Beer Page</h1> <h4>Loading...</h4>
+        <Title>Beer Page</Title> <h4>Loading...</h4>
       </>
     );
   }
 
   return (
     <>
-      <h1>Beer Page</h1>
+      <Title style={{ alignContent: 'center' }}>Beer Page</Title>
       <InfiniteScroll
         pageStart={0}
         loadMore={fetchBeers}
