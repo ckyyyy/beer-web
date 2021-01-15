@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Card } from 'antd';
 
 type Props = {
   beer: any;
@@ -6,7 +7,7 @@ type Props = {
 
 const Beer: FC<Props> = ({ beer }) => {
   return (
-    <div key={beer.id}>
+    <Card key={beer.id}>
       <h4>{beer.name}</h4>
       <img
         src={beer.image_url}
@@ -16,7 +17,7 @@ const Beer: FC<Props> = ({ beer }) => {
         }}
       />
       <p>{beer.tagline}</p>
-    </div>
+    </Card>
   );
 };
 
