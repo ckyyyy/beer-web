@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import BeerCard from '../../component/BeerCard';
+import BeerOverviews from '../../component/BeerOverviews';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Row, Col, Typography } from 'antd';
 
@@ -47,7 +47,7 @@ const Inventory: FC = () => {
         <Row gutter={16}>
           {beers.map((beer, index) => (
             <Col span={6} key={index}>
-              <BeerCard beer={beer} key={index} />
+              <BeerOverviews beer={beer} key={index} />
             </Col>
           ))}
         </Row>

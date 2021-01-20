@@ -7,7 +7,7 @@ type Props = {
   beer: Beer;
 };
 
-const BeerCard: FC<Props> = ({ beer }) => {
+const BeerOverviews: FC<Props> = ({ beer }) => {
   const [detailsVisible, setDetailsVisible] = useState(false);
   return (
     <>
@@ -34,4 +34,4 @@ const BeerCard: FC<Props> = ({ beer }) => {
   );
 };
 
-export default BeerCard;
+export default BeerOverviews;
