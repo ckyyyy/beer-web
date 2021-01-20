@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
 import { Card, Button } from 'antd';
 import BeerDetails from './BeerDetails';
+import { Beer } from '../types/Beer';
 
 type Props = {
-  beer: any;
+  beer: Beer;
 };
 
-const Beer: FC<Props> = ({ beer }) => {
+const BeerCard: FC<Props> = ({ beer }) => {
   const [detailsVisible, setDetailsVisible] = useState(false);
   return (
     <>
@@ -33,4 +34,4 @@ const Beer: FC<Props> = ({ beer }) => {
   );
 };
 
-export default Beer;
+export default BeerCard;

@@ -1,8 +1,9 @@
-import { FC, useState } from 'react';
-import { Button, Modal, Descriptions } from 'antd';
+import { FC } from 'react';
+import { Modal, Descriptions } from 'antd';
+import { Beer } from '../types/Beer';
 
 type Props = {
-  beer: any;
+  beer: Beer;
   visible: boolean;
   setVisible: (visible: boolean) => void;
 };
