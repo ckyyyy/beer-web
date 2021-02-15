@@ -5,7 +5,7 @@ import { Row, Col, Typography } from 'antd';
 
 const { Title } = Typography;
 
-const Inventory: FC = () => {
+const Beer: FC = () => {
   const [beers, setBeers] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -56,4 +56,4 @@ const Inventory: FC = () => {
   );
 };
 
-export default Inventory;
+export default Beer;
