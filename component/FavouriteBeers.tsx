@@ -22,7 +22,7 @@ const BeerDetails: FC<Props> = ({ beers, visible, setVisible }) => {
         <Row gutter={16}>
           {beers.map((beer, index) => (
             <Col span={6} key={index}>
-              <Card key={beer.id}>
+              <Card key={beer.id} style={{ height: 200, backgroundColor: "floralwhite" }}>
                 <h4>{beer.name}</h4>
                 <img
                   src={beer.image_url}
