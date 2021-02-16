@@ -11,20 +11,11 @@ const BeerOverviews: FC<Props> = ({ beer }) => {
   const [detailsVisible, setDetailsVisible] = useState(false);
   return (
     <>
-      <Card key={beer.id}>
-        <h4>{beer.name}</h4>
-        <img
-          src={beer.image_url}
-          alt=""
-          style={{
-            width: '30px',
-          }}
-        />
-        <p>{beer.tagline}</p>
-        <Button type="primary" onClick={() => setDetailsVisible(true)}>
-          Details
-        </Button>
-      </Card>
+      <p>{beer.tagline}</p>
+      <Button type="primary" onClick={() => setDetailsVisible(true)}>
+        Details
+      </Button>
+
       <BeerDetails
         beer={beer}
         visible={detailsVisible}

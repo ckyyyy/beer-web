@@ -1,13 +1,16 @@
 import { FC, useEffect, useState } from 'react';
 import BeerOverviews from '../../component/BeerOverviews';
+import FavouriteBeers from '../../component/FavouriteBeers';
 import InfiniteScroll from 'react-infinite-scroller';
-import { Row, Col, Typography } from 'antd';
+import { Row, Col, Typography, Button, Card } from 'antd';
 
 const { Title } = Typography;
 
 const Beer: FC = () => {
   const [beers, setBeers] = useState([]);
   const [page, setPage] = useState(1);
+  const [favBeers, setFavBeers] = useState([]);
+  const [favBeersVisible, setFavBeerVisible] = useState(false);
 
   const fetchBeers = () => {
     let url = `https://api.punkapi.com/v2/beers?page=${page}`;
@@ -23,6 +26,16 @@ const Beer: FC = () => {
     fetchBeers();
   }, []);
 
+  const editFavourite = (editBeer) => {
+    let editFavBeers = [...favBeers];
+    const editIndex = favBeers.indexOf(editBeer);
+    editIndex !== -1
+      ? editFavBeers.splice(editIndex, 1)
+      : editFavBeers.push(editBeer);
+    setFavBeers(editFavBeers);
+    console.log(favBeers);
+  };
+
   if (beers.length == 0) {
     return (
       <>
@@ -34,6 +47,11 @@ const Beer: FC = () => {
   return (
     <>
       <Title style={{ alignContent: 'center' }}>Beer Page</Title>
+      <FavouriteBeers
+        beers={favBeers}
+        setVisible={setFavBeerVisible}
+        visible={favBeersVisible}
+      />
       <InfiniteScroll
         pageStart={0}
         loadMore={fetchBeers}
@@ -47,7 +65,20 @@ const Beer: FC = () => {
         <Row gutter={16}>
           {beers.map((beer, index) => (
             <Col span={6} key={index}>
-              <BeerOverviews beer={beer} key={index} />
+              <Card key={beer.id}>
+                <h4>{beer.name}</h4>
+                <img
+                  src={beer.image_url}
+                  alt=""
+                  style={{
+                    width: '30px',
+                  }}
+                />
+                <BeerOverviews beer={beer} key={index} />
+                <Button type="dashed" onClick={() => editFavourite(beer)}>
+                  Favourite
+                </Button>
+              </Card>
             </Col>
           ))}
         </Row>
