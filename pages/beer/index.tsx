@@ -36,6 +36,14 @@ const Beer: FC = () => {
     console.log(favBeers);
   };
 
+  const addFavourite = (newBeer) => {
+    let newFavBeers = [...favBeers];
+    if (!favBeers.includes(newBeer)) {
+      newFavBeers.push(newBeer);
+      setFavBeers(newFavBeers);
+    }
+  };
+
   if (beers.length == 0) {
     return (
       <>
@@ -49,6 +57,7 @@ const Beer: FC = () => {
       <Title style={{ alignContent: 'center' }}>Beer Page</Title>
       <FavouriteBeers
         beers={favBeers}
+        setBeers={setFavBeers}
         setVisible={setFavBeerVisible}
         visible={favBeersVisible}
       />
@@ -65,7 +74,10 @@ const Beer: FC = () => {
         <Row gutter={16}>
           {beers.map((beer, index) => (
             <Col span={6} key={index}>
-              <Card key={beer.id} style={{ height: 250, backgroundColor: "floralwhite" }}>
+              <Card
+                key={beer.id}
+                style={{ height: 250, backgroundColor: 'floralwhite' }}
+              >
                 <h4>{beer.name}</h4>
                 <img
                   src={beer.image_url}
@@ -75,8 +87,8 @@ const Beer: FC = () => {
                   }}
                 />
                 <BeerOverviews beer={beer} key={index} />
-                <Button type="dashed" onClick={() => editFavourite(beer)}>
-                  Favourite
+                <Button type="dashed" onClick={() => addFavourite(beer)}>
+                  Add to My Favourite
                 </Button>
               </Card>
             </Col>
